@@ -3,7 +3,6 @@ import './Header.css';
 
 const Header: React.FC = () => {
   useEffect(() => {
-    // Close mobile menu when clicking on a link
     const navLinks = document.querySelectorAll('.nav-link');
     const navbarCollapse = document.querySelector('.navbar-collapse');
     

@@ -3,7 +3,6 @@ import "./Home.css";
 import ScrollReveal from "scrollreveal";
 import chickenLeg from "../../assets/CV1.png";
 
-// Hvis TypeScript klager på ScrollReveal:
 
 const Home: React.FC = () => {
   useEffect(() => {
@@ -67,7 +66,7 @@ const Home: React.FC = () => {
             </a>
           </div>
 
-          <a href="/CV.pdf" className="btn">
+          <a href="/CV.pdf" target="_blank" className="btn">
             Last ned CV
           </a>
         </div>
