@@ -1,30 +1,43 @@
-import React, { useEffect } from 'react';
-import './Header.css';
+import React, { useEffect, useState } from "react";
+import "./Header.css";
 
 const Header: React.FC = () => {
+  // Hvilken seksjon er aktiv akkurat nå
+  const [activeSection, setActiveSection] = useState("home");
+
+  // Følger med på hvilken seksjon som er synlig på skjermen
   useEffect(() => {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const navbarCollapse = document.querySelector('.navbar-collapse');
-    
-    navLinks.forEach(link => {
-      link.addEventListener('click', () => {
-        if (navbarCollapse?.classList.contains('show')) {
-          const bsCollapse = new (window as any).bootstrap.Collapse(navbarCollapse, {
-            toggle: false
-          });
-          bsCollapse.hide();
-        }
-      });
-    });
+    const sections = document.querySelectorAll("section");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          // Hvis seksjonen er synlig → sett den som aktiv
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        });
+      },
+      {
+        threshold: 0.5, // 50% må være synlig
+      }
+    );
+
+    // Start å "lytte" på alle seksjoner
+    sections.forEach((section) => observer.observe(section));
   }, []);
 
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+  // Smooth scroll når du klikker på link
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    id: string
+  ) => {
     e.preventDefault();
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      // Update URL without jumping
-      window.history.pushState(null, '', `#${targetId}`);
+
+    const section = document.getElementById(id);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+      setActiveSection(id); // gjør den aktiv med en gang
     }
   };
 
@@ -32,51 +45,65 @@ const Header: React.FC = () => {
     <header>
       <nav className="navbar navbar-expand-lg navbar-dark fixed-top">
         <div className="container">
-          <a className="navbar-brand logo1" href="#home" onClick={(e) => handleSmoothScroll(e, 'home')}>
+          {/* Logo */}
+          <a
+            href="#home"
+            className="logo1"
+            onClick={(e) => handleSmoothScroll(e, "home")}
+          >
             Osman Mikael
           </a>
 
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
+          {/* Navbar */}
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item">
+              <a
+                href="#home"
+                onClick={(e) => handleSmoothScroll(e, "home")}
+                className={`nav-link ${
+                  activeSection === "home" ? "active" : ""
+                }`}
+              >
+                Home
+              </a>
+            </li>
 
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <a className="nav-link" href="#home" onClick={(e) => handleSmoothScroll(e, 'home')}>
-                  <i className="fa-solid fa-house"></i> Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#about" onClick={(e) => handleSmoothScroll(e, 'about')}>
-                  <i className="fa-solid fa-user"></i> About
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#services" onClick={(e) => handleSmoothScroll(e, 'services')}>
-                  <i className="fa-solid fa-cog"></i> Services
-                </a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#portfolio" onClick={(e) => handleSmoothScroll(e, 'portfolio')}>
-                  <i className="fa-solid fa-folder"></i> Portfolio
-                </a>
-              </li>
-              {/* <li className="nav-item">
-                <a className="nav-link" href="#contact" onClick={(e) => handleSmoothScroll(e, 'contact')}>
-                  <i className="fa-solid fa-envelope"></i> Contact
-                </a>
-              </li> */}
-            </ul>
-          </div>
+            <li className="nav-item">
+              <a
+                href="#about"
+                onClick={(e) => handleSmoothScroll(e, "about")}
+                className={`nav-link ${
+                  activeSection === "about" ? "active" : ""
+                }`}
+              >
+                About
+              </a>
+            </li>
+
+            <li className="nav-item">
+              <a
+                href="#services"
+                onClick={(e) => handleSmoothScroll(e, "services")}
+                className={`nav-link ${
+                  activeSection === "services" ? "active" : ""
+                }`}
+              >
+                Services
+              </a>
+            </li>
+
+            <li className="nav-item">
+              <a
+                href="#portfolio"
+                onClick={(e) => handleSmoothScroll(e, "portfolio")}
+                className={`nav-link ${
+                  activeSection === "portfolio" ? "active" : ""
+                }`}
+              >
+                Portfolio
+              </a>
+            </li>
+          </ul>
         </div>
       </nav>
     </header>
