@@ -40,7 +40,7 @@ const Services: React.FC = () => {
   return (
     <section className="services" id="services">
       <div className="container">
-        <h2 className="heading">Vår <span>Tjenester</span></h2>
+        <h2 className="heading">Mine <span>Tjenester</span></h2>
         <div className="services-content">
           {services.map((service, index) => (
             <div className="service-box" key={index}>

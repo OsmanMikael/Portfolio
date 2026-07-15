@@ -27,7 +27,7 @@
   
   .service-box:hover {
     border-color: var(--main-color);
-    transform: scale(1.02);
+    transform: scale(1.2);
   }
   
   .service-box i {

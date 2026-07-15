@@ -23,7 +23,7 @@ const Home: React.FC = () => {
           <h3>Hei, Dette er jeg</h3>
           <h1>Osman Mikael</h1>
           <h3>
-            Og jeg er en <span>Frontend utvikler</span>
+            Og jeg er en <span>Webutvikler</span>
           </h3>
 
           <p>

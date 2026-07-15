@@ -28,7 +28,7 @@ const About: React.FC = () => {
           <h2 className="heading">
             Om <span>Meg</span>
           </h2>
-          <h3>Frontend Utvikler</h3>
+          {/* <h3>Frontend Utvikler</h3> */}
 
           <p>
             Jeg er en positiv og løsningsorientert person med to bachelorgrader.
