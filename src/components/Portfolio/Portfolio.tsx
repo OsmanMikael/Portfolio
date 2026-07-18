@@ -23,13 +23,13 @@ const Portfolio: React.FC = () => {
       title: "Osman Mikael",
       description: "Portfolio netside",
       image: projectImg,
-      link: "osmanmikael.com",
+      link: "https://osmanmikael.com/",
     },
     {
       title: "Norway Portal",
       description: "En webapplikasjon med wordpress",
       image: projectImg,
-      link: "norwayportal.net",
+      link: "https://norwayportal.net/",
     },
     {
       title: "Web Design",
