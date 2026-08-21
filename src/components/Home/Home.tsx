@@ -66,7 +66,7 @@ const Home: React.FC = () => {
             </a>
           </div>
 
-          <a href="/CV_Osman Mikael.pdf" target="_blank" className="btn">
+          <a href="/CV.pdf" target="_blank" className="btn">
             Last ned CV
           </a>
         </div>
